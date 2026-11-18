@@ -1,0 +1,25 @@
+# Confidential Task Data (Do not commit)
+Cantill_DataML_Task_Kit/
+*.zip
+*.pdf
+data/
+raw_data/
+
+# Python cache & virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.env
+.venv
+env/
+venv/
+ENV/
+
+# OS and IDE files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo

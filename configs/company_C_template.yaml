@@ -1,0 +1,32 @@
+# Template configuration for Company C (used at blind test)
+company_name: "company_C"
+reporting_currency: "USD"
+taxonomy_file: "Cantill_DataML_Task_Kit/company_C/taxonomy_C.csv"
+# fx_file: "Cantill_DataML_Task_Kit/company_C/fx_rates_usd.csv" # optional if non-USD currencies present
+
+sources:
+  - name: "invoices"
+    file: "Cantill_DataML_Task_Kit/company_C/invoice_lines.csv"
+    prefix: ""
+    id_col: "line_id"
+    amount_col: "line_amount"
+    amount_type: "net" # or gross
+    # vat_col: "vat_rate"
+    # default_vat_rate: 0.15
+    currency_col: "currency"
+    # currency_rate_col: "currency_rate"
+    date_col: "invoice_date"
+    supplier_col: "supplier_name"
+    vendor_id_col: "vendor_id"
+    item_id_col: "material_number"
+    description_cols: ["description", "line_description", "item_description"]
+    status_col: "status"
+    # status_rules:
+    #   valid: ["Paid", "Approved"]
+    #   cancelled: ["Cancelled"]
+    #   not_approved: ["On Hold", "Rejected"]
+
+exclusion_rules:
+  non_procurement:
+    intercompany_gl_patterns: ["^IC", "^I/C"]
+    tax_description_keywords: ["tax", "gst", "vat"]
