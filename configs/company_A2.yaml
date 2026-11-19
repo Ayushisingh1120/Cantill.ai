@@ -1,0 +1,49 @@
+company_name: "company_A"
+reporting_currency: "ZAR"
+taxonomy_file: "Cantill_DataML_Task_Kit/company_A/taxonomy_A.csv"
+
+sources:
+  - name: "erp"
+    file: "Blind_Test_Files/A2/erp_goods_receipts.csv"
+    prefix: "ERP"
+    id_col: "line_id"
+    amount_col: "value_zar"
+    amount_type: "net"
+    currency: "ZAR"
+    date_col: "posting_date"
+    supplier_col: "supplier_name"
+    vendor_id_col: "vendor_id"
+    item_id_col: "material_number"
+    description_cols: ["material_short_text", "service_short_text"]
+    spend_type_col: "spend_type"
+    po_number_col: "po_number"
+    po_item_col: "po_item"
+    is_primary: true
+
+  - name: "invoice_tool"
+    file: "Blind_Test_Files/A2/invoice_tool_export.csv"
+    prefix: "TOOL"
+    id_col: "tool_record_id"
+    amount_col: "gross_amount"
+    amount_type: "gross"
+    vat_col: "vat_rate"
+    default_vat_rate: 0.15
+    currency_col: "currency"
+    currency: "ZAR"
+    date_col: "invoice_date"
+    supplier_col: "supplier_name_as_captured"
+    vendor_id_col: null
+    item_id_col: null
+    description_cols: ["line_text"]
+    invoice_number_col: "invoice_number"
+    po_ref_col: "po_reference"
+    status_col: "status"
+    status_rules:
+      valid: ["Paid", "Approved"]
+      cancelled: ["Cancelled"]
+      not_approved: ["On Hold", "Rejected"]
+    dedup:
+      match_against_primary: true
+      primary_po_col: "po_number"
+      tool_po_ref_col: "po_reference"
+      internal_duplicate_keys: ["invoice_number", "supplier_name_as_captured", "line_text", "gross_amount"]

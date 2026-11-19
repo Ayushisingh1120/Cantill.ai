@@ -1,0 +1,24 @@
+company_name: "company_C"
+reporting_currency: "USD"
+taxonomy_file: "Blind_Test_Files/C/category_tree_C.csv"
+
+sources:
+  - name: "invoices"
+    file: "Blind_Test_Files/C/invoice_lines.csv"
+    prefix: ""
+    id_col: "line_id"
+    amount_col: "line_amount_usd"
+    amount_type: "net"
+    currency_col: null
+    currency: "USD"
+    date_col: "invoice_date"
+    supplier_col: "supplier_name"
+    vendor_id_col: null
+    item_id_col: "product_service_code"
+    description_cols: ["line_description", "product_service_description", "invoice_description", "gl_account_description"]
+    status_col: "status"
+
+exclusion_rules:
+  non_procurement:
+    intercompany_gl_patterns: ["^IC", "^I/C"]
+    tax_description_keywords: ["tax", "heavy equipment inventory tax", "sales tax"]
